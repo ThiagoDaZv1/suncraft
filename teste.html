@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suncraft - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffcc00;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Suncraft</h1>
+    </header>
+    <div class="container">
+        <img src="suncraft-logo.png" alt="Logo Suncraft">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <button type="submit" class="button">Logar</button>
+        </form>
+        <p>Não tem uma conta? <button class="button" id="registerBtn">Registrar</button></p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const storedPassword = localStorage.getItem(username);
+            if (storedPassword && storedPassword === password) {
+                window.location.href = "home.html"; // Redireciona para a nova página
+            } else {
+                alert('Usuário ou senha incorretos.');
+            }
+        });
+
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            const username = prompt('Escolha um nome de usuário:');
+            const password = prompt('Escolha uma senha:');
+
+            if (username && password) {
+                localStorage.setItem(username, password);
+                alert('Registro bem-sucedido! Você pode agora fazer login.');
+            } else {
+                alert('Registro cancelado.');
+            }
+        });
+    </script>
+</body>
+</html>
